@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-canvas: #f4f5f7;
+  --color-paper: #ffffff;
+  --color-ink: #10151f;
+  --color-line: #e1e4e9;
+  --color-muted: #66707f;
+  --color-navy: #1b3358;
+  --color-navy-light: #2c4d7d;
+  --color-navy-dark: #0f2038;
+  --color-gold: #9c7a3c;
+  --color-gold-soft: #f5eede;
+  --color-positive: #1e7a4c;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--color-gold-soft);
+  color: var(--color-navy-dark);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-navy-light);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Custom slim scrollbar for the form column */
+.slim-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+.slim-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.slim-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-line);
+  border-radius: 9999px;
+}
+
+/* Number input spin-button cleanup */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Print styles: isolate the payslip document for a clean A4 PDF/printout */
+/* ---------------------------------------------------------------------- */
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #payslip-print-area,
+  #payslip-print-area * {
+    visibility: visible;
+  }
+
+  #payslip-print-area {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+}
